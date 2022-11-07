@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   const client = new ApolloClient({
-    uri: process.env.REACT_APP_API_URL + "/graphql",
+    uri: "http://it2810-22.idi.ntnu.no:8000" + "/graphql",
     cache: new InMemoryCache(),
   });
   return (
