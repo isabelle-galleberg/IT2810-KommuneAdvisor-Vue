@@ -14,12 +14,18 @@ function App() {
   });
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={MainPage} />
-          <Stack.Screen name="Details" component={DetailsPage} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name='Home'
+          component={MainPage}
+        />
+        <Stack.Screen
+          name='Details'
+          component={DetailsPage}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     </ApolloProvider>
   );
 }

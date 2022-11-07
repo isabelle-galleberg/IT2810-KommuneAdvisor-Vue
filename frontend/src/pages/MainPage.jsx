@@ -7,9 +7,7 @@ export default function MainPage({ navigation }) {
       <Text>Main Page</Text>
       <Button
         title='Go to details page'
-        onPress={() =>
-          navigation.navigate('Details')
-        }
+        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
