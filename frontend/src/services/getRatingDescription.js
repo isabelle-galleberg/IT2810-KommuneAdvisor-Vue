@@ -1,4 +1,3 @@
-
 // returns a description based on given rating value
 export function getRatingDescription(rating) {
   switch (rating) {
