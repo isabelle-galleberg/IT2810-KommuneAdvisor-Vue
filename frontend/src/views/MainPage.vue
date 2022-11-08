@@ -1,24 +1,11 @@
-<template>
-  <el-row :gutter="20">
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-  </el-row>
-</template>
+<script setup="ts">
+import { useQuery } from "@vue/apollo-composable";
+import GET_ALL_COUNTIES from "../services/countyService";
 
-<script setup lang="ts">
-import KommuneCard from "@/components/KommuneCard.vue";
+// Example of how to fetch data from the backend
+const { result, loading, error } = useQuery(GET_ALL_COUNTIES);
 </script>
+
+<template>
+  <div>MainPage</div>
+</template>
