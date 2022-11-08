@@ -1,48 +1,69 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
-    <img
-      src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-      class="image"
-    />
-    <div style="padding: 14px">
-      <RouterLink to="/details">
-        <el-button type="primary" onclick="">Gi en vurdering</el-button>
-      </RouterLink>
-      <div class="bottom">
-        <time class="time">{{ currentDate }}</time>
-        <el-button text class="button">Operating</el-button>
+  <!-- <n-card>
+    <template #cover>
+      <img :src="props.weaponImg" />
+    </template>
+    <div>
+      {{ props.name }}
+      <div>{{ props.county }}</div>
+    </div>
+  </n-card> -->
+
+  <n-card hoverable>
+    <div class="cardContent">
+      <img :src="props.weaponImg" />
+      <div class="kommuneInfo">
+        <div class="kommuneName">{{ props.name }}</div>
+        <div class="kommuneCounty">📍{{ props.county }}</div>
+        <RouterLink to="/details">
+          <n-button strong secondary type="info"> Vis mer </n-button>
+        </RouterLink>
       </div>
     </div>
-  </el-card>
+  </n-card>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
-
-const currentDate = ref(new Date());
+<script setup="ts">
+const props = defineProps({
+  id: { type: Number },
+  name: { type: String, required: true },
+  county: { type: String, required: true },
+  weaponImg: { type: String },
+  rating: { type: Number },
+});
 </script>
 
-<style>
-.time {
-  font-size: 12px;
-  color: #999;
+<style scoped>
+img {
+  width: 60px;
 }
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
+.n-card {
+  width: 265px;
+  height: 150px;
+}
+.cardContent {
+  height: 110px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  gap: 15px;
 }
 
-.button {
-  padding: 0;
-  min-height: auto;
+.kommuneInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
 }
 
-.image {
-  width: 100%;
-  display: block;
+.kommuneName {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.kommuneCounty {
+  font-size: 14px;
+  color: grey;
 }
 </style>
