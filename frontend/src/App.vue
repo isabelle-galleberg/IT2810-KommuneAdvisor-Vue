@@ -1,9 +1,12 @@
+<template>
+  <RouterView />
+</template>
+
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import { createApp, provide, h } from "vue";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { provideApolloClient } from "@vue/apollo-composable";
-
 import {
   ApolloClient,
   createHttpLink,
@@ -12,7 +15,6 @@ import {
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
   uri: "http://localhost:8000/graphql",
 });
 
@@ -35,9 +37,5 @@ const app = createApp({
   render: () => h(RouterView),
 });
 </script>
-
-<template>
-  <RouterView />
-</template>
 
 <style scoped></style>
