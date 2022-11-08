@@ -1,17 +1,8 @@
-<script>
+<script setup="ts">
 import { useQuery } from "@vue/apollo-composable";
 import GET_ALL_COUNTIES from "../services/countyService";
 
-export default {
-  setup() {
-    const { result, loading, error } = useQuery(GET_ALL_COUNTIES);
-    return {
-      result,
-      loading,
-      error,
-    };
-  },
-};
+const { result, loading, error } = useQuery(GET_ALL_COUNTIES);
 </script>
 
 <template>
