@@ -1,24 +1,35 @@
-<template>
-  <el-row :gutter="20">
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-    <el-col :span="6"
-      ><div class="grid-content ep-bg-purple" />
-      <KommuneCard
-    /></el-col>
-  </el-row>
-</template>
+<script>
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 
-<script setup lang="ts">
-import KommuneCard from "@/components/KommuneCard.vue";
+export default {
+  setup() {
+    const { result, loading, error } = useQuery(gql`
+      query getCounties {
+        counties {
+          _id
+          name
+        }
+      }
+    `);
+
+    return {
+      result,
+      loading,
+      error,
+    };
+  },
+};
 </script>
+
+<template>
+  <div v-if="loading">Loading...</div>
+
+  <div v-else-if="error">Error: {{ error.message }}</div>
+
+  <ul v-else-if="result && result.counties">
+    <li v-for="user of result.counties" :key="user._id">
+      {{ user.name }}
+    </li>
+  </ul>
+</template>
