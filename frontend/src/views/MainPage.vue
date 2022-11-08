@@ -4,11 +4,15 @@ import kommuneService from "../services/kommuneService";
 import KommuneCard from "../components/KommuneCard.vue";
 
 // pagesize funker ikke?
-const { result, loading, error } = useQuery(kommuneService.GET_ALL_KOMMUNER, {
-  variables: {
-    pageSize: 1,
-  },
-});
+const { result, loading, error } = useQuery(
+  kommuneService.GET_ALL_KOMMUNER,
+  () => ({
+    sortBy: "name",
+    sortDirection: "ascending",
+    pageSize: 100,
+    page: 1,
+  })
+);
 </script>
 
 <template>
