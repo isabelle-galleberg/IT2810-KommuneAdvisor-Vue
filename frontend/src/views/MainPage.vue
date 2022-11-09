@@ -1,7 +1,13 @@
 <template>
+  <n-input
+    v-model:value="searchStore.search"
+    type="text"
+    @update:value="changeSearch"
+  />
+  <InputFields />
   <n-config-provider :theme-overrides="themeOverrides">
-    <div v-if="loading || loadingCount">Loading...</div>
-    <div v-else-if="error || errorCount">Kommuner ikke funnet</div>
+    <div v-if="loading">Loading...</div>
+    <div v-else-if="error">Kommuner ikke funnet</div>
     <div v-else-if="result && result.kommuner" class="mainPage">
       <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
         <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
@@ -12,17 +18,95 @@
           />
         </n-gi>
       </n-grid>
-      <n-pagination v-model:page="currPage" :page-count="totalKommuner" />
+      <n-pagination v-model:page="pageStore.page" :page-count="totalKommuner" />
     </div>
   </n-config-provider>
 </template>
 
-<script setup="ts">
+<script setup="ts" lang="ts">
 import { useQuery } from "@vue/apollo-composable";
 import kommuneService from "../services/kommuneService";
 import KommuneCard from "../components/KommuneCard.vue";
-import { ref } from "vue";
+import InputFields from "../components/InputFields.vue";
+import { ref, watchEffect } from "vue";
 import { NConfigProvider } from "naive-ui";
+import { useSearchStore } from "@/stores/search";
+import { useCountyStore } from "@/stores/county";
+import { useSortStore } from "@/stores/sort";
+import { usePageStore } from "@/stores/page";
+
+// global states from stores
+const searchStore = useSearchStore();
+const countyStore = useCountyStore();
+const sortStore = useSortStore();
+const pageStore = usePageStore();
+
+const totalKommuner = ref(1);
+const sortBy = ref("name");
+const sortDirection = ref("ascending");
+
+// get all kommuner
+const { result, loading, error } = useQuery(
+  kommuneService.GET_ALL_KOMMUNER,
+  () => ({
+    sortBy: sortBy.value,
+    sortDirection: sortDirection.value,
+    pageSize: 24,
+    page: pageStore.page,
+    county: countyStore.county,
+    search: searchStore.search,
+  })
+);
+
+// get number of kommuner
+useQuery(kommuneService.GET_KOMMUNER_COUNT, () => ({
+  county: countyStore.county,
+  search: searchStore.search,
+})).onResult((res) => {
+  totalKommuner.value = Math.ceil(res.data.kommunerCount / 24);
+});
+
+// set page to 1 when search is changed
+function changeSearch() {
+  pageStore.updatePage(1);
+}
+
+// sort kommuner based on dropdown value
+const sortKommuner = () => {
+  switch (sortStore.sort) {
+    case "Befolkning høy-lav":
+      sortBy.value = "population";
+      sortDirection.value = "descending";
+      break;
+    case "Befolkning lav-høy":
+      sortBy.value = "population";
+      sortDirection.value = "ascending";
+      break;
+    case "Areal høy-lav":
+      sortBy.value = "area";
+      sortDirection.value = "descending";
+      break;
+    case "Areal lav-høy":
+      sortBy.value = "area";
+      sortDirection.value = "ascending";
+      break;
+    case "Rangering høy-lav":
+      sortBy.value = "rating";
+      sortDirection.value = "descending";
+      break;
+    case "Rangering lav-høy":
+      sortBy.value = "rating";
+      sortDirection.value = "ascending";
+      break;
+    default:
+      sortBy.value = "name";
+      sortDirection.value = "ascending";
+  }
+};
+
+watchEffect(() => {
+  sortKommuner();
+});
 
 // override pagination theme from Naive UI
 const themeOverrides = {
@@ -31,34 +115,6 @@ const themeOverrides = {
     primaryColorHover: "#80bfff",
   },
 };
-
-const currPage = ref(1);
-const totalKommuner = ref(1);
-
-// get all kommuner from GraphQL
-const { result, loading, error } = useQuery(
-  kommuneService.GET_ALL_KOMMUNER,
-  () => ({
-    sortBy: "name",
-    sortDirection: "ascending",
-    pageSize: 24,
-    page: currPage.value,
-  })
-);
-
-// county and search will be replaced with global states
-// resultCount will be updated when input fields are changed
-// get number of kommuner from GraphQL
-const {
-  result: resultCount,
-  loading: loadingCount,
-  error: errorCount,
-} = useQuery(kommuneService.GET_KOMMUNER_COUNT, () => ({
-  // county: county,
-  // search: search
-})).onResult((res) => {
-  totalKommuner.value = Math.ceil(res.data.kommunerCount / 24);
-});
 </script>
 
 <style scoped>
