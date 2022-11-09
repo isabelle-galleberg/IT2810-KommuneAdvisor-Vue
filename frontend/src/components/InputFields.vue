@@ -1,16 +1,18 @@
 <template>
-  <n-space vertical>
+  <n-space>
     <n-select
       v-model:value="countyStore.county"
       :options="countyOptions"
       @update:value="changeCounty"
       :clearable="true"
+      placeholder="Velg fylke"
     />
     <n-select
       v-model:value="sortStore.sort"
       :options="sortOptions"
       @update:value="changeSort"
       :clearable="true"
+      placeholder="Sorter etter"
     />
   </n-space>
 </template>
@@ -68,6 +70,21 @@ function changeSort() {
 </script>
 
 <style scoped>
+.n-space {
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  padding: 20px 0;
+}
+
+@media (max-width: 500px) {
+  .n-space {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .n-select {
   width: 200px;
 }

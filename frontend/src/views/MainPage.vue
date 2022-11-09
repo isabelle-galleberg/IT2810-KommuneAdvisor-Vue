@@ -1,14 +1,16 @@
 <template>
-  <n-input
-    v-model:value="searchStore.search"
-    type="text"
-    @update:value="changeSearch"
-  />
-  <InputFields />
+  <div class="kommuneInput">
+    <n-input
+      v-model:value="searchStore.search"
+      type="text"
+      @update:value="changeSearch"
+    />
+    <InputFields />
+  </div>
   <n-config-provider :theme-overrides="themeOverrides">
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Kommuner ikke funnet</div>
-    <div v-else-if="result && result.kommuner" class="mainPage">
+    <div v-else-if="result && result.kommuner">
       <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
         <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
           <KommuneCard
@@ -118,10 +120,13 @@ const themeOverrides = {
 </script>
 
 <style scoped>
-.mainPage {
+.kommuneInput {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+.n-input {
+  width: 200px;
 }
 .n-pagination {
   display: flex;
