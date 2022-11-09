@@ -70,6 +70,6 @@ const {
 .n-pagination {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 </style>
