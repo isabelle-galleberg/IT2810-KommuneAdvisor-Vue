@@ -13,7 +13,7 @@
   </n-card>
 </template>
 
-<script setup="ts">
+<script setup="ts" lang="ts">
 const props = defineProps({
   id: { type: Number },
   name: { type: String, required: true },
