@@ -17,6 +17,7 @@
             :name="kommune.name"
             :county="kommune.county.name"
             :weaponImg="kommune.logoUrl"
+            :rating="kommune.averageRating"
           />
         </n-gi>
       </n-grid>
