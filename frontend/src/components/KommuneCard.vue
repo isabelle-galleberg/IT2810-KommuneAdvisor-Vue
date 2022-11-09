@@ -63,6 +63,7 @@ a {
 .kommuneCounty {
   font-size: 14px;
   color: grey;
+  white-space: nowrap;
 }
 
 .kommuneRating {
