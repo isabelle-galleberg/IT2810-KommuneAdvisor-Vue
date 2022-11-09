@@ -1,22 +1,20 @@
 <template>
-  <div v-if="loading || loadingCount">Loading...</div>
-  <div v-else-if="error || errorCount">Kommuner ikke funnet</div>
-  <div v-else-if="result && result.kommuner" class="mainPage">
-    <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
-      <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
-        <KommuneCard
-          :name="kommune.name"
-          :county="kommune.county.name"
-          :weaponImg="kommune.logoUrl"
-        />
-      </n-gi>
-    </n-grid>
-    <n-pagination
-      v-model:page="currPage"
-      :page-count="totalKommuner"
-      class="pagination"
-    />
-  </div>
+  <n-config-provider :theme-overrides="themeOverrides">
+    <div v-if="loading || loadingCount">Loading...</div>
+    <div v-else-if="error || errorCount">Kommuner ikke funnet</div>
+    <div v-else-if="result && result.kommuner" class="mainPage">
+      <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
+        <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
+          <KommuneCard
+            :name="kommune.name"
+            :county="kommune.county.name"
+            :weaponImg="kommune.logoUrl"
+          />
+        </n-gi>
+      </n-grid>
+      <n-pagination v-model:page="currPage" :page-count="totalKommuner" />
+    </div>
+  </n-config-provider>
 </template>
 
 <script setup="ts">
@@ -24,6 +22,15 @@ import { useQuery } from "@vue/apollo-composable";
 import kommuneService from "../services/kommuneService";
 import KommuneCard from "../components/KommuneCard.vue";
 import { ref } from "vue";
+import { NConfigProvider } from "naive-ui";
+
+// override pagination theme from Naive UI
+const themeOverrides = {
+  common: {
+    primaryColor: "#405a7e",
+    primaryColorHover: "#80bfff",
+  },
+};
 
 const currPage = ref(1);
 const totalKommuner = ref(1);
@@ -60,7 +67,7 @@ const {
   flex-direction: column;
   justify-content: center;
 }
-.pagination {
+.n-pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
