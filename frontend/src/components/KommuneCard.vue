@@ -1,14 +1,4 @@
 <template>
-  <!-- <n-card>
-    <template #cover>
-      <img :src="props.weaponImg" />
-    </template>
-    <div>
-      {{ props.name }}
-      <div>{{ props.county }}</div>
-    </div>
-  </n-card> -->
-
   <n-card hoverable>
     <div class="cardContent">
       <img :src="props.weaponImg" />
@@ -16,7 +6,7 @@
         <div class="kommuneName">{{ props.name }}</div>
         <div class="kommuneCounty">📍{{ props.county }}</div>
         <RouterLink to="/details">
-          <n-button strong secondary type="info"> Vis mer </n-button>
+          <n-button strong secondary type="info"> Vis mer</n-button>
         </RouterLink>
       </div>
     </div>
@@ -40,6 +30,7 @@ img {
 .n-card {
   width: 265px;
   height: 150px;
+  margin: 0 auto;
 }
 .cardContent {
   height: 110px;
@@ -53,7 +44,6 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-start;
   height: 100%;
 }
 
