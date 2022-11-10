@@ -6,6 +6,7 @@
       @update:value="changeCounty"
       :clearable="true"
       placeholder="Velg fylke"
+      :show-checkmark="false"
     />
     <n-select
       v-model:value="sortStore.sort"
@@ -13,6 +14,7 @@
       @update:value="changeSort"
       :clearable="true"
       placeholder="Sorter etter"
+      :show-checkmark="false"
     />
   </n-space>
 </template>
