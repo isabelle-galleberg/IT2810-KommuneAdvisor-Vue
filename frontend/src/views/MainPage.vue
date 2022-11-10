@@ -5,6 +5,7 @@
       type="text"
       @update:value="changeSearch"
     />
+    <search-icon size="20" class="searchIcon" />
     <InputFields />
   </div>
   <n-config-provider :theme-overrides="themeOverrides">
@@ -133,5 +134,10 @@ const themeOverrides = {
   display: flex;
   justify-content: center;
   margin-top: 25px;
+}
+.searchIcon {
+  position: absolute;
+  margin-left: 170px;
+  margin-top: 7px;
 }
 </style>
