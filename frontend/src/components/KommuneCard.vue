@@ -6,14 +6,17 @@
         <div class="kommuneName">{{ props.name }}</div>
         <div class="kommuneCounty">📍{{ props.county }}</div>
         <RouterLink to="/details">
-          <n-button strong secondary type="info"> Vis mer</n-button>
+          <n-button strong secondary type="info">Vis mer</n-button>
         </RouterLink>
+      </div>
+      <div v-if="props.rating || props.rating === 0" class="kommuneRating">
+        ({{ props.rating != 0 ? props.rating.toFixed(2) : "-" }})
       </div>
     </div>
   </n-card>
 </template>
 
-<script setup="ts">
+<script setup="ts" lang="ts">
 const props = defineProps({
   id: { type: Number },
   name: { type: String, required: true },
@@ -31,6 +34,11 @@ img {
   width: 265px;
   height: 150px;
   margin: 0 auto;
+}
+
+.n-button,
+a {
+  width: 80px;
 }
 .cardContent {
   height: 110px;
@@ -55,5 +63,17 @@ img {
 .kommuneCounty {
   font-size: 14px;
   color: grey;
+  white-space: nowrap;
+}
+
+.kommuneRating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: darkgray;
+  font-size: small;
 }
 </style>
