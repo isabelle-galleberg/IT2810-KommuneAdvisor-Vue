@@ -1,21 +1,27 @@
 <template>
   <n-space>
-    <n-select
-      v-model:value="countyStore.county"
-      :options="countyOptions"
-      @update:value="changeCounty"
-      :clearable="true"
-      placeholder="Velg fylke"
-      :show-checkmark="false"
-    />
-    <n-select
-      v-model:value="sortStore.sort"
-      :options="sortOptions"
-      @update:value="changeSort"
-      :clearable="true"
-      placeholder="Sorter etter"
-      :show-checkmark="false"
-    />
+    <label>
+      Filtrer på fylke
+      <n-select
+        v-model:value="countyStore.county"
+        :options="countyOptions"
+        @update:value="changeCounty"
+        :clearable="true"
+        :show-checkmark="false"
+        placeholder=""
+      />
+    </label>
+    <label>
+      Sorter
+      <n-select
+        v-model:value="sortStore.sort"
+        :options="sortOptions"
+        @update:value="changeSort"
+        :clearable="true"
+        :show-checkmark="false"
+        placeholder=""
+      />
+    </label>
   </n-space>
 </template>
 
@@ -76,7 +82,7 @@ function changeSort() {
   display: flex;
   flex-direction: row;
   justify-content: center !important;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 @media (max-width: 500px) {
@@ -89,5 +95,8 @@ function changeSort() {
 
 .n-select {
   width: 200px;
+}
+label {
+  color: black;
 }
 </style>

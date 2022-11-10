@@ -1,10 +1,14 @@
 <template>
   <div class="kommuneInput">
-    <n-input
-      v-model:value="searchStore.search"
-      type="text"
-      @update:value="changeSearch"
-    />
+    <label
+      >Søk etter en kommune
+      <n-input
+        v-model:value="searchStore.search"
+        type="text"
+        @update:value="changeSearch"
+        placeholder=""
+      />
+    </label>
     <search-icon size="20" class="searchIcon" />
     <InputFields />
   </div>
@@ -129,6 +133,7 @@ const themeOverrides = {
 }
 .n-input {
   width: 200px;
+  display: block;
 }
 .n-pagination {
   display: flex;
@@ -138,6 +143,11 @@ const themeOverrides = {
 .searchIcon {
   position: absolute;
   margin-left: 170px;
-  margin-top: 7px;
+  margin-top: 31px;
+  color: #405a7e;
+}
+label {
+  color: black;
+  display: block;
 }
 </style>
