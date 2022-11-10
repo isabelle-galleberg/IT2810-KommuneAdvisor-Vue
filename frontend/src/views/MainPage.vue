@@ -10,7 +10,7 @@
           placeholder=""
         />
       </label>
-      <search-icon size="20" class="searchIcon" />
+      <search-icon size="18" class="searchIcon" />
       <InputFields />
     </div>
     <div v-if="loading">Loading...</div>
@@ -143,7 +143,7 @@ const themeOverrides = {
 .searchIcon {
   position: absolute;
   margin-left: 170px;
-  margin-top: 31px;
+  margin-top: 32px;
   color: #405a7e;
 }
 label {
