@@ -1,18 +1,18 @@
 <template>
-  <div class="kommuneInput">
-    <label
-      >Søk etter en kommune
-      <n-input
-        v-model:value="searchStore.search"
-        type="text"
-        @update:value="changeSearch"
-        placeholder=""
-      />
-    </label>
-    <search-icon size="20" class="searchIcon" />
-    <InputFields />
-  </div>
   <n-config-provider :theme-overrides="themeOverrides">
+    <div class="kommuneInput">
+      <label
+        >Søk etter en kommune
+        <n-input
+          v-model:value="searchStore.search"
+          type="text"
+          @update:value="changeSearch"
+          placeholder=""
+        />
+      </label>
+      <search-icon size="20" class="searchIcon" />
+      <InputFields />
+    </div>
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Kommuner ikke funnet</div>
     <div v-else-if="result && result.kommuner">
@@ -116,11 +116,11 @@ watchEffect(() => {
   sortKommuner();
 });
 
-// override pagination theme from Naive UI
+// override theme from Naive UI
 const themeOverrides = {
   common: {
     primaryColor: "#405a7e",
-    primaryColorHover: "#80bfff",
+    primaryColorHover: "#405a7e",
   },
 };
 </script>
