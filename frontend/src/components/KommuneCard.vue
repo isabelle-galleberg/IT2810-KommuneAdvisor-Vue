@@ -10,7 +10,7 @@
         </RouterLink>
       </div>
       <div v-if="props.rating || props.rating === 0" class="kommuneRating">
-        ({{ props.rating != 0 ? props.rating.toFixed(2) : "-" }})
+        ⭐️ ({{ props.rating != 0 ? props.rating.toFixed(2) : "-" }})
       </div>
     </div>
   </n-card>
