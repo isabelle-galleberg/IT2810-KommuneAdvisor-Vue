@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup="ts">
+<script setup="ts" lang="ts">
 import AddReview from "../components/AddReview.vue";
 </script>
 

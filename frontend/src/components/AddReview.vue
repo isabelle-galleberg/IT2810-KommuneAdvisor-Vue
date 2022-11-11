@@ -53,7 +53,7 @@
   </n-modal>
 </template>
 
-<script setup="ts">
+<script setup="ts" lang="ts">
 import { ref } from "vue";
 import { getRatingDescription } from "@/services/getRatingDescription";
 import { useRoute } from "vue-router";
