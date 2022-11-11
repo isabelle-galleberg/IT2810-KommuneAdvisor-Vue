@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
-    <a href="/">
+    <RouterLink to="/">
       <img class="logo" src="../assets/logo.png" alt="navbar" />
-    </a>
+    </RouterLink>
   </div>
 </template>
 
