@@ -56,9 +56,10 @@
 <script setup="ts">
 import { defineComponent, ref } from "vue";
 import { getRatingDescription } from "@/services/getRatingDescription";
+import { useRoute } from "vue-router";
 
 // url param kommune/:id
-//const { id } = useParams();
+const id = useRoute().params.id;
 
 const showModal = ref(false);
 const title = ref("");
