@@ -57,6 +57,8 @@
 import { defineComponent, ref } from "vue";
 import { getRatingDescription } from "@/services/getRatingDescription";
 import { useRoute } from "vue-router";
+import { useMutation } from "@vue/apollo-composable";
+import reviewService from "../services/reviewService";
 
 // url param kommune/:id
 const id = useRoute().params.id;
@@ -68,6 +70,9 @@ const name = ref("");
 const rating = ref(0);
 const ratingDescription = ref("");
 const errorMessage = ref(false);
+
+// post review data to GraphQL
+const { mutate: postReview } = useMutation(reviewService.POST_REVIEW);
 
 function openModal() {
   resetValues();
@@ -88,21 +93,17 @@ async function addReview() {
   }
   // post review to GraphQL
   else {
-    console.log(rating.value);
-    console.log(title.value);
-    console.log(description.value);
-    console.log(name.value);
-    // const response = await postReview({
-    //   variables: {
-    //     name: review.name,
-    //     rating: review.rating,
-    //     title: review.title,
-    //     description: review.description,
-    //     kommuneId: id,
-    //   },
-    // });
-    // review._id = response.data.addKommuneRating._id;
-    // review.timestamp = response.data.addKommuneRating.timestamp;
+    const response = await postReview({
+      name: name.value,
+      rating: rating.value,
+      title: title.value,
+      description: description.value,
+      kommuneId: id,
+    });
+    //review id
+    console.log(response.data.addKommuneRating._id);
+    // review timestamp
+    console.log(response.data.addKommuneRating.timestamp);
     // onCreate(review);
 
     // close modal
