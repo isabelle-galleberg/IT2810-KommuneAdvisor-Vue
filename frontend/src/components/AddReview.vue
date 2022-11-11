@@ -54,7 +54,7 @@
 </template>
 
 <script setup="ts">
-import { defineComponent, ref } from "vue";
+import { ref } from "vue";
 import { getRatingDescription } from "@/services/getRatingDescription";
 import { useRoute } from "vue-router";
 import { useMutation } from "@vue/apollo-composable";
