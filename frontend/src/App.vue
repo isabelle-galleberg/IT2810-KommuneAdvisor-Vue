@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <RouterView />
 </template>
 
@@ -12,6 +13,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client/core";
+import Navbar from "@/components/Navbar.vue";
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
