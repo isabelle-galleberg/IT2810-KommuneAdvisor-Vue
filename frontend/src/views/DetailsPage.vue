@@ -1,8 +1,12 @@
 <template>
   <div class="about">
-    <h1>This is the details page</h1>
+    <KommuneDetails/>
   </div>
 </template>
+
+<script setup="ts" lang="ts">
+import KommuneDetails from "@/components/KommuneDetails.vue";
+</script>
 
 <style>
 @media (min-width: 1024px) {
