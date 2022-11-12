@@ -17,7 +17,7 @@ import Navbar from "@/components/NavigationBar.vue";
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: "http://localhost:8000/graphql",
+  uri: "http://it2810-22.idi.ntnu.no:8000/graphql",
 });
 
 // Cache implementation

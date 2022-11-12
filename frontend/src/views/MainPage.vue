@@ -19,6 +19,7 @@
       <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
         <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
           <KommuneCard
+            :id="kommune._id"
             :name="kommune.name"
             :county="kommune.county.name"
             :weaponImg="kommune.logoUrl"
