@@ -11,12 +11,6 @@
     <div className="line"></div>
     <div className="kommuneDetails">
       <div>
-        <div className="rating">
-          <Rating
-            initialValue="{data.kommune.averageRating}"
-            readonly
-            size="{30}"
-          />
           <div data-cy="kommune-rating" className="averageRating">
             {{
               result.kommune.averageRating != 0
