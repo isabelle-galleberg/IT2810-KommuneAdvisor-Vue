@@ -47,20 +47,20 @@
           </a>
         </p>
       </div>
-      <img
-        :src="result.kommune.mapUrl"
-        alt="kommuneMap"
-        className="mapImg"
-      />
+      <img :src="result.kommune.mapUrl" alt="kommuneMap" className="mapImg" />
     </div>
   </div>
 </template>
 <script setup="ts" lang="ts">
 import kommuneService from "@/services/kommuneService";
 import { useQuery } from "@vue/apollo-composable";
+import { useRoute } from "vue-router";
+
+// url param kommune/:id
+const id = useRoute().params.id;
 
 const { result, loading, error } = useQuery(kommuneService.GET_KOMMUNE, () => ({
-  id: "0301",
+  id: id,
 }));
 </script>
 
