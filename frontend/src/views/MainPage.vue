@@ -15,19 +15,24 @@
     </div>
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Kommuner ikke funnet</div>
-    <div v-else-if="result && result.kommuner">
-      <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
-        <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
-          <KommuneCard
-            :id="kommune._id"
-            :name="kommune.name"
-            :county="kommune.county.name"
-            :weaponImg="kommune.logoUrl"
-            :rating="kommune.averageRating"
-          />
-        </n-gi>
-      </n-grid>
-      <n-pagination v-model:page="pageStore.page" :page-count="totalKommuner" />
+    <div class="kommuneContainer" v-else-if="result && result.kommuner">
+      <div style="width: 80%">
+        <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
+          <n-gi v-for="kommune of result.kommuner" :key="kommune._id">
+            <KommuneCard
+              :id="kommune._id"
+              :name="kommune.name"
+              :county="kommune.county.name"
+              :weaponImg="kommune.logoUrl"
+              :rating="kommune.averageRating"
+            />
+          </n-gi>
+        </n-grid>
+        <n-pagination
+          v-model:page="pageStore.page"
+          :page-count="totalKommuner"
+        />
+      </div>
     </div>
   </n-config-provider>
 </template>
@@ -127,6 +132,10 @@ const themeOverrides = {
 </script>
 
 <style scoped>
+.kommuneContainer {
+  display: flex;
+  justify-content: center;
+}
 .kommuneInput {
   display: flex;
   flex-direction: column;
