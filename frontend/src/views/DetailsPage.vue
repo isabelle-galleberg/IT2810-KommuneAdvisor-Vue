@@ -1,11 +1,11 @@
 <template>
   <div class="about">
-    <AddReview />
+    <KommuneDetails />
   </div>
 </template>
 
 <script setup="ts" lang="ts">
-import AddReview from "../components/AddReview.vue";
+import KommuneDetails from "../components/KommuneDetails.vue";
 </script>
 
 <style>
@@ -14,6 +14,7 @@ import AddReview from "../components/AddReview.vue";
     min-height: 100vh;
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
 }
 </style>
