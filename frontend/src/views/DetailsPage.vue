@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <KommuneDetails/>
+    <KommuneDetails />
     <AddReview />
   </div>
 </template>
