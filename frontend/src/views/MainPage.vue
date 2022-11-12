@@ -13,7 +13,11 @@
       <search-icon size="18" class="searchIcon" />
       <InputFields />
     </div>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading">
+      <div class="spinnerContainer">
+        <Spinner :active="loading" />
+      </div>
+    </div>
     <div v-else-if="error">Kommuner ikke funnet</div>
     <div v-else-if="result && result.kommuner">
       <n-grid y-gap="10" cols="1 550:2 830:3 1100:4">
@@ -37,6 +41,7 @@ import { useQuery } from "@vue/apollo-composable";
 import kommuneService from "../services/kommuneService";
 import KommuneCard from "../components/KommuneCard.vue";
 import InputFields from "../components/InputFields.vue";
+import Spinner from "../components/Spinner.vue";
 import { ref, watchEffect } from "vue";
 import { NConfigProvider } from "naive-ui";
 import { useSearchStore } from "@/stores/search";
@@ -150,5 +155,11 @@ const themeOverrides = {
 label {
   color: black;
   display: block;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
 </style>
