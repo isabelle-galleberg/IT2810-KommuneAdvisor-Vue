@@ -72,3 +72,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.n-card{
+  width: 500px;
+}
+@media (max-width: 525px) {
+  .n-card {
+    width: 300px;
+  }
+}
