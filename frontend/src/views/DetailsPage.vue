@@ -6,6 +6,7 @@
 
 <script setup="ts" lang="ts">
 import KommuneDetails from "@/components/KommuneDetails.vue";
+
 </script>
 
 <style>

@@ -1,14 +1,23 @@
 <template>
-    <h1>Hei</h1>
-  <div class="detailsPage">
-    <div class="detailsPageTop">
-      <h1 data-cy="kommune-name">{{ result.kommune.name }}</h1>
+  <div className="detailsPage">
+    <div className="detailsPageTop">
+      <img
+        :src="result.kommune.logoUrl"
+        className="weaponImg"
+        alt="kommuneWeaponImage"
+      />
+      <h1>{{ result.kommune.name }}</h1>
     </div>
-    <div class="line"></div>
-    <div class="kommuneDetails">
+    <div className="line"></div>
+    <div className="kommuneDetails">
       <div>
-        <div class="rating">
-          <div data-cy="kommune-rating" class="averageRating">
+        <div className="rating">
+          <Rating
+            initialValue="{data.kommune.averageRating}"
+            readonly
+            size="{30}"
+          />
+          <div data-cy="kommune-rating" className="averageRating">
             {{
               result.kommune.averageRating != 0
                 ? "(" + result.kommune.averageRating.toFixed(2) + ")"
@@ -33,16 +42,15 @@
         </p>
         <p>
           Les mer her:{' '}
-          <a href="result.kommune.snlLink" target="_blank" rel="noreferrer">
+          <a href="{result.kommune.snlLink}" target="_blank" rel="noreferrer">
             {{ result.kommune.name }}
           </a>
         </p>
       </div>
       <img
-        data-cy="kommune-map"
-        src="{data.kommune.mapUrl}"
+        :src="result.kommune.mapUrl"
         alt="kommuneMap"
-        class="mapImg"
+        className="mapImg"
       />
     </div>
   </div>
@@ -50,7 +58,6 @@
 <script setup="ts" lang="ts">
 import kommuneService from "@/services/kommuneService";
 import { useQuery } from "@vue/apollo-composable";
-import { onBeforeMount } from "vue";
 
 const { result, loading, error } = useQuery(kommuneService.GET_KOMMUNE, () => ({
   id: "0301",
