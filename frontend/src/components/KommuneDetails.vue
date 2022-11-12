@@ -4,17 +4,29 @@
   <div v-else-if="result && result.kommune" className="detailsPage">
     <div className="detailsPageTop">
       <img
-        :src="result.kommune.logoUrl"
-        className="weaponImg"
-        alt="kommuneWeaponImage"
+        @click="
+          () => {
+            $router.push('/');
+          }
+        "
+        class="backarrow"
+        src="../assets/backArrow.png"
+        alt=""
       />
-      <h1>{{ result.kommune.name }}</h1>
+      <div class="content">
+        <img
+          :src="result.kommune.logoUrl"
+          className="weaponImg"
+          alt="kommuneWeaponImage"
+        />
+        <h1>{{ result.kommune.name }}</h1>
+      </div>
     </div>
     <div className="line"></div>
     <div className="kommuneDetails">
       <div>
         <div className="rating">
-          <div data-cy="kommune-rating" className="averageRating">
+          <div className="averageRating">
             <n-rate
               size="large"
               readonly
@@ -28,15 +40,13 @@
           </div>
         </div>
         <label>📍 Fylke</label>
-        <p data-cy="kommune-county">{{ result.kommune.county.name }}</p>
+        <p>{{ result.kommune.county.name }}</p>
         <label>👨‍👩‍👧‍👧 Innbyggertall</label>
-        <p data-cy="kommune-population">{{ result.kommune.population }}</p>
+        <p>{{ result.kommune.population }}</p>
         <label>🏔 Areal</label>
-        <p data-cy="kommune-area">
-          {{ result.kommune.areaInSquareKm }} km<sup>2</sup>
-        </p>
+        <p>{{ result.kommune.areaInSquareKm }} km<sup>2</sup></p>
         <label>📝 Skriftspråk</label>
-        <p data-cy="kommune-written-language">
+        <p>
           {{
             result.kommune.writtenLanguage.charAt(0).toUpperCase() +
             result.kommune.writtenLanguage.slice(1)
@@ -44,11 +54,7 @@
         </p>
         <p>
           Les mer her:
-          <a
-            href="{'https:' + result.kommune.snlLink}"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a :href="result.kommune.snlLink" target="_blank" rel="noreferrer">
             {{ result.kommune.name }}
           </a>
         </p>
@@ -57,25 +63,40 @@
     </div>
 
     <AddReview />
+    <div class="reviews">
+      <ReviewCard
+        :key="review.id"
+        v-for="review in result.kommune.kommuneRating"
+        :review="review"
+      />
+    </div>
   </div>
 </template>
 <script setup="ts" lang="ts">
 import kommuneService from "@/services/kommuneService";
 import { useQuery } from "@vue/apollo-composable";
-import { onMounted } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import AddReview from "../components/AddReview.vue";
+import ReviewCard from "../components/ReviewCard.vue";
 const id = useRoute().params.id;
 
 const { result, loading, error } = useQuery(kommuneService.GET_KOMMUNE, () => ({
   id: id,
 }));
-onMounted(() => {
-  console.log(result.value);
-});
 </script>
 
 <style scoped>
+.reviews {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  gap: 16px;
+  flex-direction: column;
+}
 p {
   font-size: 18px;
   margin-top: 0px;
@@ -94,8 +115,13 @@ label {
 }
 
 .detailsPageTop {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+.detailsPageTop > .content {
+  display: flex;
   align-items: center;
   gap: 10px;
   padding-bottom: 10px;
@@ -113,11 +139,12 @@ label {
   align-items: center;
 }
 
-.backArrow {
+.backarrow {
   max-width: 60px;
   position: absolute;
-  left: 5%;
-  margin-top: -15px;
+  left: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
   cursor: pointer;
 }
 
@@ -143,6 +170,10 @@ label {
   height: 2px;
   width: clamp(100px, calc(100vw - 50px), 600px);
 }
+.averageRating {
+  gap: 10px;
+  display: flex;
+}
 
 @media screen and (max-width: 500px) {
   .kommuneDetails {
@@ -154,7 +185,7 @@ label {
     width: 150px;
   }
 
-  .backArrow {
+  .backarrow {
     max-width: 40px;
   }
 
