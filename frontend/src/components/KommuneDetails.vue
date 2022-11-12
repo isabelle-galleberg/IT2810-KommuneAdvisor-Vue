@@ -11,6 +11,7 @@
     <div className="line"></div>
     <div className="kommuneDetails">
       <div>
+        <div className="rating">
           <div data-cy="kommune-rating" className="averageRating">
             {{
               result.kommune.averageRating != 0
