@@ -5,7 +5,7 @@
       <div class="kommuneInfo">
         <div class="kommuneName">{{ props.name }}</div>
         <div class="kommuneCounty">📍{{ props.county }}</div>
-        <RouterLink to="/details">
+        <RouterLink :to="{ path: `kommune/${props.id}` }">
           <n-button strong secondary type="info">Vis mer</n-button>
         </RouterLink>
       </div>
@@ -18,7 +18,7 @@
 
 <script setup="ts" lang="ts">
 const props = defineProps({
-  id: { type: Number },
+  id: { type: String },
   name: { type: String, required: true },
   county: { type: String, required: true },
   weaponImg: { type: String },

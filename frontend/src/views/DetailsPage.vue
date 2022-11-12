@@ -1,8 +1,12 @@
 <template>
   <div class="about">
-    <h1>This is the details page</h1>
+    <AddReview />
   </div>
 </template>
+
+<script setup="ts" lang="ts">
+import AddReview from "../components/AddReview.vue";
+</script>
 
 <style>
 @media (min-width: 1024px) {

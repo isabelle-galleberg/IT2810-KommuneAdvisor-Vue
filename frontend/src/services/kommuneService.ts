@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client/core";
+import gql from "graphql-tag";
 
 /**
  * Fetch data for a kommune with given id
