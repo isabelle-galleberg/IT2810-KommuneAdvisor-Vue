@@ -4,7 +4,6 @@
     v-model:show="showModal"
     class="custom-card"
     preset="card"
-    :style="bodyStyle"
     title="Gi kommunen en vurdering!"
     :bordered="false"
     size="huge"
