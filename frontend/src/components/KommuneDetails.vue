@@ -1,5 +1,9 @@
 <template>
-  <div v-if="loading">Loading...</div>
+  <div v-if="loading">
+    <div class="spinnerContainer">
+      <Spinner :active="loading" />
+    </div>
+  </div>
   <div v-else-if="error">Kommuner ikke funnet</div>
   <div v-else-if="result && result.kommune" className="detailsPage">
     <div className="detailsPageTop">
@@ -78,14 +82,18 @@ import { useQuery } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import AddReview from "../components/AddReview.vue";
 import ReviewCard from "../components/ReviewCard.vue";
+import Spinner from "../components/Spinner.vue";
 
 // url param kommune/:id
 const id = useRoute().params.id;
 
 // get kommune data from GraphQL
-const { result, loading, error, refetch } = useQuery(kommuneService.GET_KOMMUNE, () => ({
-  id: id,
-}));
+const { result, loading, error, refetch } = useQuery(
+  kommuneService.GET_KOMMUNE,
+  () => ({
+    id: id,
+  })
+);
 
 // refresh the page when new review is added
 function refresh() {
@@ -211,6 +219,12 @@ label {
 
   p {
     font-size: 16px;
+  }
+
+  .spinnerContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
   }
 }
 </style>

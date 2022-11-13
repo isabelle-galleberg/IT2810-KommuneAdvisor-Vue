@@ -70,7 +70,7 @@ const rating = ref(0);
 const ratingDescription = ref("");
 const errorMessage = ref(false);
 
-const emit= defineEmits(["onCreate"])
+const emit = defineEmits(["onCreate"]);
 
 // post review data to GraphQL
 const { mutate: postReview } = useMutation(reviewService.POST_REVIEW);
