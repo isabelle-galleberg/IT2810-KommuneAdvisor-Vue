@@ -62,11 +62,11 @@
       <img :src="result.kommune.mapUrl" alt="kommuneMap" className="mapImg" />
     </div>
 
-    <AddReview />
+    <AddReview @onCreate="refresh" />
     <div class="reviews">
       <ReviewCard
         :key="review.id"
-        v-for="review in result.kommune.kommuneRating"
+        v-for="review in result.kommune.kommuneRating.slice().reverse()"
         :review="review"
       />
     </div>
@@ -78,11 +78,21 @@ import { useQuery } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import AddReview from "../components/AddReview.vue";
 import ReviewCard from "../components/ReviewCard.vue";
+
+// url param kommune/:id
 const id = useRoute().params.id;
 
-const { result, loading, error } = useQuery(kommuneService.GET_KOMMUNE, () => ({
+// get kommune data from GraphQL
+const { result, loading, error, refetch } = useQuery(kommuneService.GET_KOMMUNE, () => ({
   id: id,
 }));
+
+// refresh the page when new review is added
+function refresh() {
+  setTimeout(() => {
+    refetch();
+  }, 1);
+}
 </script>
 
 <style scoped>

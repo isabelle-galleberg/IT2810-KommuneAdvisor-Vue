@@ -70,12 +70,13 @@ const rating = ref(0);
 const ratingDescription = ref("");
 const errorMessage = ref(false);
 
+const emit= defineEmits(["onCreate"])
+
 // post review data to GraphQL
 const { mutate: postReview } = useMutation(reviewService.POST_REVIEW);
 
 function openModal() {
   resetValues();
-
   //close modal
   showModal.value = true;
 }
@@ -92,25 +93,20 @@ async function addReview() {
   }
   // post review to GraphQL
   else {
-    const response = await postReview({
+    await postReview({
       name: name.value,
       rating: rating.value,
       title: title.value,
       description: description.value,
       kommuneId: id,
     });
-    //review id
-    console.log(response.data.addKommuneRating._id);
-    // review timestamp
-    console.log(response.data.addKommuneRating.timestamp);
-    // onCreate(review);
-
+    emit("onCreate");
     // close modal
     showModal.value = false;
   }
 }
 
-function updateRatingDescription(rating) {
+function updateRatingDescription(rating: number) {
   //hide error message
   errorMessage.value = false;
   //update rating description
