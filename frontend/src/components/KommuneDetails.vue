@@ -96,6 +96,7 @@ const { result, loading, error } = useQuery(kommuneService.GET_KOMMUNE, () => ({
   justify-content: center;
   gap: 16px;
   flex-direction: column;
+  margin-top: 10px;
 }
 p {
   font-size: 18px;

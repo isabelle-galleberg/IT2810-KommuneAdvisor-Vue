@@ -128,9 +128,6 @@ function resetValues() {
   errorMessage.value = false;
 }
 
-// change modal width
-const bodyStyle = { width: "500px" };
-
 // override theme from Naive UI
 const themeOverrides = {
   common: {
@@ -146,6 +143,15 @@ const themeOverrides = {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 525px) {
+  .modalButtons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0px;
+  }
+}
 .rating {
   display: flex;
   flex-direction: column;
@@ -159,8 +165,8 @@ const themeOverrides = {
   gap: 20px;
 }
 .n-button {
-  margin: 10px;
-  margin-top: 20px;
+  margin: 5px;
+  margin-top: 12px;
   width: 160px;
 }
 .n-input {
