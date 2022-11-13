@@ -2,6 +2,8 @@
 
 KommuneAdvisor is a web application that lets you find information about and review the Norwegian municipalities, also known as kommuner. A user can search for a given kommune and filter kommuner on county. Kommuner can also be sorted by area, population and ratings, both ascending and descending. From the search results, the user can click on a kommune to view a details page with more information and ratings about this kommune.
 
+In this project we have refactored the client of this application by changing JavaScript framework from React to Vue3. Composistion API. We have used the component library [Naive UI](https://www.naiveui.com/en-US/os-theme). 
+
 ## 💻Project setup
 
 ### Frontend
@@ -9,14 +11,12 @@ KommuneAdvisor is a web application that lets you find information about and rev
 In the project directory, you can run:
 
 - `cd frontend` to navigate to the frontend directory
-- `npm start` to install dependencies and run the project in development mode
-- `npm test` to install dependencies run the test runner interactively
+- `npm install` to install dependencies 
+- `npm run dev` to run the project in development mode
 - `npm run build` to build the app for production to the `build` folder
 - `npx run lint` to run prettier and eslint checks
-- `npm run test:e2e` to run Cypress tests (headlessly)
-- `npm run test:e2e-open` to run Cypress tests (with GUI)
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 ### Backend
 
@@ -32,9 +32,9 @@ The backend runs on [http://localhost:8000](http://localhost:8000).
 
 ## 🌍Global state management
 
-The main purpose of global state is to share a state among multiple components in order to avoid prop drilling. In this application we have implemented global state management using [Redux Toolkit](https://redux-toolkit.js.org) for the search field, dropdown menus and current page. A user can search for and filter kommuner, click on a kommune to view the details page, then go back to the search results and see that the values for search field, filter and page have persisted.
+The main purpose of global state is to share a state among multiple components in order to avoid prop drilling. In this application we have implemented global state management using [Pinia](https://pinia.vuejs.org) for the search field, dropdown menus and current page. A user can search for and filter kommuner, click on a kommune to view the details page, then go back to the search results and see that the values for search field, filter and page have persisted.
 
-We implemented the global states with Redux before fetching data from the backend, and therefore did not know that this could be done in the cache configuration with Apollo client. Although using Redux requires a bit more boilerplate code, it was quite simple to implement and works well with our GraphQL backend.
+We have chosen Pinia because ... It was also the default when initializing a new Vue3 project. 
 
 
 ## 🔎Search
@@ -53,19 +53,6 @@ The kommune cards are paginated, displaying 24 kommuner at a time. We chose this
 ### Detail view
 
 From the search results, a user can click into the details page of a kommune. This does a new query to fetch information about the given kommune based on id. The id is also displayed in the url for the details page `/kommune/:id`.
-
-
-## 💅Web accessibility
-
-[Web accessibility](https://monsido.com/web-accessibility) is the need for websites to utilize tools and technologies developed to aid the perception, understanding, contribution, navigation, and interaction of a person with disabilities on the site. We have used the component library [Mantine](https://mantine.dev) in order to achieve this.
-
-To make our website _perceivable_, the information about a kommune is displayed on the details page with a readable font and described with a label and emoji. All input fields are described with a label as well. When hovering a button, the cursor is changed to pointer, indicating that the user can click. All images have textual alternatives, implemented with the alt-attribute.
-
-To make the website _understanding_, feedback is given on user interaction. When hovering a kommune card or review, a shadown is added. While fetching data a loading icon is displayed, and if the data cannot be retrieved an error message is displayed. When creating a new review, the star rating displays a textual description according to the number of selected stars.
-
-To ensure intuitive _navigation_, the user can view the kommune details page by clicking on the "Show more" button for the given kommune. In order to navigate back to the main page, the user can either click on the logo in the navbar or the back-button.
-
-The website scales dynamically after screen size, and is therefore mobile responsive for screens larger than 300px.
 
 
 ## 💾Backend
@@ -166,16 +153,6 @@ The average rating is calculated by taking the sum of all ratings and dividing i
 ### Timestamp
 
 We have chosen to store the date as a timestamp in the backend. This way it is easy to convert to other date formats and time zones later.
-
-
-## 🧪Testing
-
-### Jest
-
-We have used the testing framework Jest to create unit tests, using its built-in functions. One of the tests that were performed is to check whether the app crashes on render, by testing the `App` component. In addition, we have tested user interaction for the search input field. The service function `getRatingDescription` has also been tested, which is used to display the correct description of selected amount of stars. Snapshot tests are useful when wanting to make sure that the UI does not change unexpectedly. The tests generate a json version of a component, to check if this matches an earlier representation. We created snapshot tests for the `KommuneCard` and `ReviewCard` components with use of the react-test-renderer, to ensure that they rendered as expected with data.
-
-### Cypress
-Cypress is used for end-to-end testing. The naming convention of Cypress IDs is to use kebab-case, rather than camel-case, which is used in other parts of the application. This is done to better distinguish between the two types of IDs. We have created tests for the main page, details page and when adding a review. 
 
 
 ## 🚀Git guidelines and code quality
