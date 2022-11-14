@@ -5,7 +5,12 @@
 </template>
 
 <script setup="ts" lang="ts">
+import { onMounted } from "vue";
 import KommuneDetails from "../components/KommuneDetails.vue";
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
 
 <style>
