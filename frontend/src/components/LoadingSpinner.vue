@@ -18,8 +18,10 @@ const props = defineProps({
 <style scoped>
 .loader-wrapper {
   position: fixed;
-  left: 50%;
   top: 50%;
+  left: 50%;
+  margin-top: -40px; /* Negative half of height. */
+  margin-left: -40px; /* Negative half of width. */
 }
 
 .loader {
