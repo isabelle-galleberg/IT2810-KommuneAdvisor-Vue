@@ -126,6 +126,11 @@ watchEffect(() => {
   sortKommuner();
 });
 
+// scroll to top of page
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
 // override theme from Naive UI
 const themeOverrides = {
   common: {
@@ -133,21 +138,6 @@ const themeOverrides = {
     primaryColorHover: "#405a7e",
   },
 };
-
-onBeforeUnmount(() => {
-  const xValue = window.scrollX;
-  const yValue = window.scrollY;
-  sessionStorage.setItem("x", xValue.toString());
-  sessionStorage.setItem("y", yValue.toString());
-});
-
-onMounted(() => {
-  const xValue = Number(sessionStorage.getItem("x"));
-  const yValue = Number(sessionStorage.getItem("y"));
-  setTimeout(() => {
-    window.scrollTo(xValue, yValue);
-  }, 100);
-});
 </script>
 
 <style scoped>
