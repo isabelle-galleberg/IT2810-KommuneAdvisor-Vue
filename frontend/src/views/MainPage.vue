@@ -141,15 +141,11 @@ onBeforeUnmount(() => {
   const yValue = window.scrollY;
   sessionStorage.setItem("x", xValue.toString());
   sessionStorage.setItem("y", yValue.toString());
-  console.log("values saved");
-  console.log(window.scrollX.toString(), window.scrollY.toString());
 });
 
 onMounted(() => {
   const xValue = Number(sessionStorage.getItem("x"));
   const yValue = Number(sessionStorage.getItem("y"));
-  console.log("values loaded");
-  console.log(xValue, yValue);
   setTimeout(() => {
     window.scrollTo(xValue, yValue);
   }, 100);
