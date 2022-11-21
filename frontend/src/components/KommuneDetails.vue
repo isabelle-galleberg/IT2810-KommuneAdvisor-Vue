@@ -82,7 +82,7 @@ import { useQuery } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import AddReview from "../components/AddReview.vue";
 import ReviewCard from "../components/ReviewCard.vue";
-import Spinner from "../components/Spinner.vue";
+import Spinner from "./LoadingSpinner.vue";
 
 // url param kommune/:id
 const id = useRoute().params.id;

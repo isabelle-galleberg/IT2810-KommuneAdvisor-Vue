@@ -8,6 +8,7 @@
 import { onMounted } from "vue";
 import KommuneDetails from "../components/KommuneDetails.vue";
 
+// scroll to top of page
 onMounted(() => {
   window.scrollTo(0, 0);
 });
