@@ -13,7 +13,7 @@
       <search-icon size="18" class="searchIcon" />
       <InputFields />
     </div>
-    <div v-if="loading" class="loadingSpinner">
+    <div v-if="loading">
       <Spinner :active="loading" />
     </div>
     <div v-else-if="error">Kommuner ikke funnet</div>
@@ -178,9 +178,5 @@ onMounted(() => {
 label {
   color: black;
   display: block;
-}
-
-.loadingSpinner {
-
 }
 </style>

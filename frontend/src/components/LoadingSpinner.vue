@@ -17,6 +17,9 @@ const props = defineProps({
 
 <style scoped>
 .loader-wrapper {
+  position: fixed;
+  left: 50%;
+  top: 50%;
 }
 
 .loader {
@@ -32,10 +35,10 @@ const props = defineProps({
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #6916a0;
+  border: 8px solid #405a7e;
   border-radius: 50%;
   animation: loader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #6916a0 transparent transparent transparent;
+  border-color: #405a7e transparent transparent transparent;
 }
 .loader div:nth-child(1) {
   animation-delay: -0.45s;
