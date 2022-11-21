@@ -47,12 +47,13 @@ import kommuneService from "../services/kommuneService";
 import KommuneCard from "../components/KommuneCard.vue";
 import InputFields from "../components/InputFields.vue";
 import Spinner from "../components/Spinner.vue";
-import { ref, watchEffect } from "vue";
-import { NConfigProvider } from "naive-ui";
+import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import { NConfigProvider, NGi, NGrid, NInput, NPagination } from "naive-ui";
 import { useSearchStore } from "@/stores/search";
 import { useCountyStore } from "@/stores/county";
 import { useSortStore } from "@/stores/sort";
 import { usePageStore } from "@/stores/page";
+import { SearchIcon } from "vue-tabler-icons";
 
 // global states from stores
 const searchStore = useSearchStore();
@@ -134,6 +135,21 @@ const themeOverrides = {
     primaryColorHover: "#405a7e",
   },
 };
+
+onBeforeUnmount(() => {
+  const xValue = window.scrollX;
+  const yValue = window.scrollY;
+  sessionStorage.setItem("x", xValue.toString());
+  sessionStorage.setItem("y", yValue.toString());
+});
+
+onMounted(() => {
+  const xValue = Number(sessionStorage.getItem("x"));
+  const yValue = Number(sessionStorage.getItem("y"));
+  setTimeout(() => {
+    window.scrollTo(xValue, yValue);
+  }, 100);
+});
 </script>
 
 <style scoped>
